@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+			<h1 id="new_snapshot_setup">New Snapshot Setup</h1>
+			<p class="lead">This is where you start a new snapshot.</p>
+			<hr>
+			<form action="/new_snapshot/" method="post" accept-charset="utf-8" class="form-horizontal" role="form">
+				
+				<div class="form-group">
+					<label for="snapshot_name" class="col-sm-3 control-label">Snapshot Name</label>
+					<div class="col-sm-6">
+						<input type="text" class="form-control" id="snapshot_name" placeholder="" name="snapshot_name">
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="length_seconds" class="col-sm-3 control-label">Lenght (s.)</label>
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="length_seconds" placeholder="" name="length_seconds">
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="gain" class="col-sm-3 control-label">Gain</label>
+					<div class="col-sm-2">
+						<input type="number" class="form-control" id="gain" placeholder="" name="gain">
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="execute_button" class="col-sm-3 control-label"></label>
+					<div class="col-sm-2">
+						<button type="submit" class="btn btn-default" id="execute_button">Execute snapshot &rarr;</button>
+					</div>
+				</div>
+			</form>
+{% endblock %}

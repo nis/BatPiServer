@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+			<h1 id="snapshots_list">Snapshots</h1>
+			<p class="lead">A list of current snapshots on the system.</p>
+			<p><a href="/snapshots"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-refresh"></span> Reload</button></a> to see changes or <a href="/new_snapshot/"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-plus"></span> Create</button></a> a new snapshot.</p>
+			{% with messages = get_flashed_messages(with_categories=true) %}
+				{% if messages %}
+    				{% for category, message in messages %}
+    				<div class="alert alert-{{ category }} alert-dismissible" role="alert">
+						<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						{{ message }}
+					</div>
+    		<!-- <div class="alert alert-{{ category }}" role="alert">{{ message }}</div> -->
+    				{% endfor %}
+				{% endif %}
+			{% endwith %}
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>ID</th>
+						<th>State</th>
+						<th>Length</th>
+						<th>Gain</th>
+						<th>Spectrogram</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for snapshot in snapshots %}
+					<tr>
+						<td>{{snapshot.SNAPSHOT_NAME}}</td>
+						<td>{{snapshot.SNAPSHOT_ID}}</td>
+						<td>{{snapshot.SNAPSHOT_STATE}}</td>
+						<td>{{snapshot.SNAPSHOT_LENGTH}}</td>
+						<td>{{snapshot.SNAPSHOT_GAIN}}</td>
+						<td>
+							
+							{% if snapshot.SNAPSHOT_RECORDING %}
+								<a href="/see/{{snapshot.SNAPSHOT_RECORDING}}"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-eye-open"></span> See</button></a>
+							{% endif %}
+
+						</td>
+						<td><a href="/download/{{snapshot.SNAPSHOT_ID}}"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-download"></span> Download</button></a></td>
+						<td><a href="/delete/{{snapshot.SNAPSHOT_ID}}"><button type="button" class="btn btn-default btn-xs"><span class="glyphicon glyphicon-trash"></span> Delete</button></a></td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+{% endblock %}
